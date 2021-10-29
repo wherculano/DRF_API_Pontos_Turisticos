@@ -7,6 +7,6 @@ class ComentarioSerializer(ModelSerializer):
         model = Comentario
         fields = ['id', 'usuario', 'comentario', 'data', 'aprovado']
 
-    def to_representation(self, instance):
-        rep = super().to_representation(instance)
-        rep['usuario'] = UserSerializer(instance.usuario).data  # ToDo ver como criar serializer do User
+    # def to_representation(self, instance):
+    #     rep = super().to_representation(instance)
+    #     rep['usuario'] = UserSerializer(instance.usuario).data  # ToDo ver como criar serializer do User
