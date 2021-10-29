@@ -8,12 +8,23 @@ class PontoTuristicoViewSet(ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    # queryset = PontoTuristico.objects.all()
+    queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
-    http_method_names = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']  # lista de metodos que o endpoint aceitará
 
     def get_queryset(self):  # metodo que sobrescreve a variavel queryset
-        return PontoTuristico.objects.filter(aprovado=True)
+        id = self.request.query_params.get('id', None)
+        nome = self.request.query_params.get('nome', None)
+        descricao = self.request.query_params.get('descricao', None)
+        queryset = PontoTuristico.objects.all()
+
+        if id:
+            queryset = queryset.filter(id=id)
+        if nome:
+            queryset = queryset.filter(nome__iexact=nome)  # iexact ignora case sensitive
+        if descricao:
+            queryset = queryset.filter(descricao__iexact=descricao)
+
+        return queryset
 
     def list(self, request, *args, **kwargs):  # sobrescreve a ação do GET do endpoint como um todo
         # Sobrescreveu o método, mas continua tendo o mesmo resultado caso este não tivesse sido implementado.
@@ -42,11 +53,11 @@ class PontoTuristicoViewSet(ModelViewSet):
         # Sobrescreveu o método, mas continua tendo o mesmo resultado caso este não tivesse sido implementado.
         return super(PontoTuristicoViewSet, self).partial_update(request, *args, **kwargs)
 
-    @action(methods=['POST'], detail=True)  # Action Personalizada. Detail True disponibiliza a PK
-    def denunciar(self, request, pk=None):  # acessa um recurso (pk) em especifico
-        """Efetua denuncia de um ponto turistico (pontosturisticos/id/denunciar)"""
-        pass
-
-    @action(methods=['GET'], detail=False)
-    def teste(self, request):  # acessa o endpoint como um todo
-        pass
+    # @action(methods=['POST'], detail=True)  # Action Personalizada. Detail True disponibiliza a PK
+    # def denunciar(self, request, pk=None):  # acessa um recurso (pk) em especifico
+    #     """Efetua denuncia de um ponto turistico (pontosturisticos/id/denunciar)"""
+    #     pass
+    #
+    # @action(methods=['GET'], detail=False)
+    # def teste(self, request):  # acessa o endpoint como um todo
+    #     pass
