@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 from core.api.viewsets import PontoTuristicoViewSet
 from atracoes.api.viewsets import AtracaoViewSet
 from enderecos.api.viewsets import EnderecoViewSet
@@ -31,8 +32,13 @@ router.register(r'enderecos', EnderecoViewSet)
 router.register(r'comentarios', ComentarioViewSet)
 router.register(r'avaliacoes', AvaliacaoViewSet)
 
+# 'Gambiarra' apenas para desenvolvimento. Para produção, deverá fazer upload das imagens em um AWS por exemplo.
 urlpatterns = [
                   path('', include(router.urls)),
+                  path('api-token-auth/', obtain_auth_token),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# 'Gambiarra' apenas para desenvolvimento. Para produção, deverá fazer upload das imagens em um AWS por exemplo.
+
+
+
+
