@@ -10,7 +10,9 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pontos_turisticos.settings')
 
-application = get_wsgi_application()
+application = Cling(get_wsgi_application())
+# verifica se é um arquivo statico e retorna, senão muda para o Django
