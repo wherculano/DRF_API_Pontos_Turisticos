@@ -9,6 +9,7 @@ djangorestframework = "*"
 pillow = "*"
 django-filter = "*"
 python-decouple = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
