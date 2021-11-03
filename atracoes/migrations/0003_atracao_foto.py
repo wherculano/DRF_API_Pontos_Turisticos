@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('atracoes', '0002_rename_idade_min_atracao_idade_minima'),
     ]

@@ -1,7 +1,8 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.filters import SearchFilter
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, DjangoModelPermissions
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.viewsets import ModelViewSet
+
 from core.models import PontoTuristico
 from .serializers import PontoTuristicoSerializer
 
@@ -12,8 +13,8 @@ class PontoTuristicoViewSet(ModelViewSet):
     """
     queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )  # permite apenas leitura se nao estiver autenticado
-    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticatedOrReadOnly,)  # permite apenas leitura se nao estiver autenticado
+    authentication_classes = (TokenAuthentication,)
     filter_fields = ['id', 'nome', 'descricao', 'aprovado']
     filter_backends = (SearchFilter,)
     search_fields = ('nome', 'descricao', 'endereco__endereco_1')

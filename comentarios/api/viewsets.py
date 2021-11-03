@@ -1,7 +1,8 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated  # IsAdminUser (permite que somente ADM tenha acesso)
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.viewsets import ModelViewSet
+
 from comentarios.models import Comentario
 from .serializers import ComentarioSerializer
 
